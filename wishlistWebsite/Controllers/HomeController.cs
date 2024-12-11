@@ -5,7 +5,8 @@ namespace InputBasedWebsiteMVC.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private string connectionString = "Data Source=app.db;Version=3;";
+
         // GET: /Home
         public IActionResult Index()
         {
