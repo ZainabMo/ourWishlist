@@ -1,0 +1,18 @@
+﻿@model WishlistWebsiteMVC.Models.ZainabModel
+
+<h5>Zainab's Wishlist</h5>
+
+@if (Model.CanEdit)
+    {
+        <!-- Display two buttons if CanEdit is true -->
+        <form method="post" action="/Home/ZainabPage">
+            <button type="submit" name="action" value="add">+</button>
+            <button type="submit" name="action" value="view">View Awwab's List</button>
+        </form>
+    }
+else
+    {
+        <form method="post" action="/Home/ZainabPage">
+            <button type="submit" name="action" value="back">Back to My List</button>
+        </form>
+    }

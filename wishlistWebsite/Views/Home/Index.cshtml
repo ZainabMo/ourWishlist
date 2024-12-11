@@ -1,29 +1,25 @@
 ﻿@model WishlistWebsiteMVC.Models.InputModel
 
-@{
-    ViewData["Title"] = "Home Page";
-}
 
-<h1>Welcome to the input-based website!</h1>
+<h5>Enter your nickname to access:</h5>
 
 <form method="post">
-    <label for="userInput">Enter J or K:</label>
     <input type="text" id="userInput" name="UserInput" value="@Model.UserInput" />
-    <button type="submit">Submit</button>
+    <button type="submit" name="action" value="enter">→</button>
 </form>
 
-@if (!string.IsNullOrEmpty(Model.Message))
+@* @if (!string.IsNullOrEmpty(Model.Message))
 {
     <div>
         @Model.Message
     </div>
-}
+} *@
 
-@if (Model.IsAwwab)
+@* @if (Model.IsAwwab)
 {
     <h2 style="color: red;">Red Header</h2>
 }
 else if (Model.IsZainab)
 {
     <h2 style="color: green;">Green Header</h2>
-}
+} *@
