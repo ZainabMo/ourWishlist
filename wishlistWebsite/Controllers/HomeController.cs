@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WishlistWebsiteMVC.Models;
+using System.Data.SQLite;
 
 namespace InputBasedWebsiteMVC.Controllers
 {
@@ -47,14 +48,30 @@ namespace InputBasedWebsiteMVC.Controllers
         }
         
         [HttpPost]
-        public ActionResult AwwabPage(string action)
+        public ActionResult AwwabPage(string action, string value)
         {          
+            var hisModel = new AwwabModel(){
+                    CanEdit = true
+                };
             if (action == "view")
             {
                 var myViewModel = new ZainabModel{
                     CanEdit = false
                 };
                 return View("ZainabPage", myViewModel);
+            }
+            else if(action == "add"){
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO table1 (Value) VALUES (@Value)";
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Value", value);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return View("AwwabPage", hisModel);
             }
             else if(action == "back"){
                 var myModel = new ZainabModel(){
@@ -63,22 +80,36 @@ namespace InputBasedWebsiteMVC.Controllers
                 return View("ZainabPage", myModel);
             }
             else{
-                var hisModel = new AwwabModel(){
-                    CanEdit = true
-                };
                 return View("AwwabPage", hisModel);
             }
         }
 
         [HttpPost]
-        public ActionResult ZainabPage(string action)
+        public ActionResult ZainabPage(string action, string value)
         {          
+            var myModel = new ZainabModel(){
+                    CanEdit = true
+                };
             if (action == "view")
             {
                 var hisViewModel = new AwwabModel{
                     CanEdit = false
                 };
                 return View("ZainabPage", hisViewModel);
+            }
+            else if (action == "add"){
+
+                using (var connection = new SQLiteConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "INSERT INTO table2 (Value) VALUES (@Value)";
+                        using (var command = new SQLiteCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@Value", value);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                return View("ZainabPage", myModel);
             }
             else if(action == "back"){
                 var hisModel = new AwwabModel(){
@@ -87,9 +118,6 @@ namespace InputBasedWebsiteMVC.Controllers
                 return View("AwwabPage", hisModel);
             }
             else{
-                var myModel = new ZainabModel(){
-                    CanEdit = true
-                };
                 return View("ZainabPage", myModel);
             }
         }

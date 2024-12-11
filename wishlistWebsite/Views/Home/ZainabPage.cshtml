@@ -6,8 +6,12 @@
     {
         <!-- Display two buttons if CanEdit is true -->
         <form method="post" action="/Home/ZainabPage">
-            <button type="submit" name="action" value="add">+</button>
+            @* <button type="submit" name="action" value="add">+</button> *@
             <button type="submit" name="action" value="view">View Awwab's List</button>
+        </form>
+        <form method="post" action="@Url.Action("AddToTable2", "Home")">
+            <input type="text" name="value" placeholder="Enter value for Table2" required />
+            <button type="submit">Add to Table2</button>
         </form>
     }
 else
